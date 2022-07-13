@@ -1,1 +1,1 @@
-Read it on http://www.murtagy.me
+Read it on https://www.murtagy.me
