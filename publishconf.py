@@ -18,7 +18,7 @@ DELETE_OUTPUT_DIRECTORY = True
 # Following items are often useful when publishing
 
 #DISQUS_SITENAME = ""
-GOOGLE_ANALYTICS = "G-WWHQV76843"
+GOOGLE_ANALYTICS = "UA-234232113-1"
 
 # Take advantage of the following defaults
 # STATIC_SAVE_AS = '{path}'
