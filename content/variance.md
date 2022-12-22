@@ -1,4 +1,4 @@
-Title: (Co)Variance in type checking
+Title: Covariance in type checking
 Date: 2022-12-21
 Category: Blog
 Tags: typing
