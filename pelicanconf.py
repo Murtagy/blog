@@ -1,4 +1,5 @@
 AUTHOR = 'Murtagy'
+FIRST_NAME = 'Maksim'
 SITENAME = "Murtagy's blog"
 SITEURL = ''
 
