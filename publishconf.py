@@ -16,6 +16,7 @@ CATEGORY_FEED_ATOM = 'feeds/{slug}.atom.xml'
 DELETE_OUTPUT_DIRECTORY = True
 
 GOOGLE_ANALYTICS = "UA-234232113-1"
+DISQUS_SITENAME = 'www-murtagy-me'
 
 # Take advantage of the following defaults
 # STATIC_SAVE_AS = '{path}'
