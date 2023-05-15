@@ -4,7 +4,7 @@ Category: Blog
 Tags: simplicity, python
 
 
-Uncle Bob and some other people claim that polymorphism is a default way to structure code.
+Uncle Bob and some other people claim that polymorphism is the default way to structure code.
 I want to explore this idea a little bit.
 
 Let's take the example from the book (Chapter 3 Functions, Switch Statements ),
@@ -107,11 +107,13 @@ There are also structural issues:
 - to answer the question - "what are the paydays of our employee types" - I have to jump into individual classes and see the logic of each. Same applies to - "how do we calculate the paychecks".
 - the class has to accept as inputs all the context around it. See PROJECT example.
 - when adding a Employee - we mix the data and the behaviour. Unlike actual companies - HR add people, Accoouting defines the pay procedures. 
-- **what we do if the emoployee is both SALARIED and COMMISSIONED?**
+- the share of data between the different calculate methods is not possible - for example how we share the working days calendar / overtime rates / etc
+- **what we do if the employee is both SALARIED and COMMISSIONED?**
 
 
 **PROJECT:**
 Let's for example introduce the new type of employee - `ProjectEmployee`, which is in charge of running the projects and receives pay 2 weeks after the project he runs is finished. 
+
 So the payday function may look like:
 
 ```python
@@ -123,13 +125,14 @@ class ProjectBasedEmployee:
             return True
         return False
 ```
-It means that we have issues with use of the generic `employee.isPayDay()`. We no longer can call the same method despite the employee type. We have to reveal the type and get projects, or the function needs to be capable of access projects `ProjectStore` directly. So we either have to inject data (list of projects), dependency (a project store) or let sideeffects happen - function accesses ProjectStore directly. Same applies to COMMISION. 
-
+ We can not call the method the same way for any employee type. We have either have to reveal the type and get the projects, or the method has to be capable of accessing `ProjectStore` directly. So we either have to inject the data (list of projects), inject the dependency (a project store) or let sideeffects happen - function accesses ProjectStore directly. Same applies to COMMISION. 
+I will let the reader deside if that is a valid concern or not.
 
 
 ## Solution
+At the moment when we realised that nothing blocks the Employee to be both SALARIED and COMMISIONED it should be clear that concepts of "how we pay an Employee" is not the same concept as "what is an Employee". 
 
-It is clear that concepts of "how we pay an Employee" is not the same concept as "what is an Employee". So we should structure our code according to business processes:
+We may better structure the code according to the ongoing processes (domains):
 
 
 ```python
@@ -149,6 +152,7 @@ def isPayday(e: Employee, date: datetime.date, pay_type: PAY_TYPE) -> bool:
         case _:
             assert_never(e.type)  # this makes new types being added not an issue (in type checked code)
 
+
 def calculatePay(e: Employee) -> Money:
     match e.type
         case EMPLOYEE_TYPE.COMMISSIONED:
@@ -164,12 +168,12 @@ def calculatePay(e: Employee) -> Money:
 ...
 
 ```
-So despite the reasons listed in the book :
-- an emloyee can have multiple pay_types, e.g. an employee is both on salary and has the commision from sales;
+So we may keep the original switch statements and functions despite the reasons listed in the book :
+- an emloyee may have multiple pay_types, e.g. an employee is both on salary and has the commission from sales;
 - the functionality of accounting is placed in a single accounting file;
 - we do not make the Employee master of it's own payroll. Which both matches business needs and is easier to navigate the concepts.
 
-Of course at some points the logic of `isPayday` will be hidden into functions (like in `calculatePay`) and we will lose the ability to see all the logic in a single screen again. But that is not the main idea (although I am fine with keeping that in a single function for now).
 
 Polymophism is a hint that we are putting a certain behaviour onto the object, while it might not be cohesive enough to the object and might have a great dependency on context around it.  
-### **The key idea is that we should take great care not to introduce the abstractions which are mismatching the business needs unless there are obvious benefits from it. And those benefits are addressing complexity in different way than number of `switch`es** 
+
+### **The key idea is that we should take great care in introducing new abstractions. Introducing a new abstraction is potentially harmful and the benefits gained should address complexity in different way than number of `switch`es** 
