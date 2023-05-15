@@ -4,7 +4,7 @@ Category: Blog
 Tags: simplicity, python
 
 
-Uncle Bob and the some other people claim that polymorphism is a default way to structure code.
+Uncle Bob and some other people claim that polymorphism is a default way to structure code.
 I want to explore this idea a little bit.
 
 Let's take the example from the book (Chapter 3 Functions, Switch Statements ),
