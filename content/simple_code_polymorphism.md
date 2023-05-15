@@ -43,9 +43,9 @@ def deliverPay(e: Employee, pay: Money) -> None:
 ```
 
 
-Let's explore what employee types mean? Probably:
-- a COMMISSIONED employee is a sales person who receives a percent of what has been sold;
-- a SALARIED employee is the one receiving a monthly salary, not really concentrated around the number of hours worked
+Let's explore what employee types mean? Probably:  
+- a COMMISSIONED employee is a sales person who receives a percent of what has been sold;  
+- a SALARIED employee is the one receiving a monthly salary, not really concentrated around the number of hours worked  
 - a HOURLY employee is the one receiving a paycheck for HOURs * RATE  
 
 Uncle Bob sees `isPayday` and `deliverPay` and other potential funcitons as problematic probably due to those functions also having a structure around:
@@ -103,12 +103,11 @@ The main benefit of this system is that when we decide to add a new employee typ
 I disagree with the structure conceptually - it is not an Employee who defines the payday and the pay calculated. And most certainly it does not deliver pay.
 
 There are also structural issues:
-
 - to answer the question - "what are the paydays of our employee types" - I have to jump into individual classes and see the logic of each. Same applies to - "how do we calculate the paychecks".
-- the class has to accept as inputs all the context around it. See PROJECT example.
-- when adding a Employee - we mix the data and the behaviour. Unlike actual companies - HR add people, Accoouting defines the pay procedures. 
-- the share of data between the different calculate methods is not possible - for example how we share the working days calendar / overtime rates / etc
-- **what we do if the employee is both SALARIED and COMMISSIONED?**
+- the class has to accept as inputs all the context around it. See PROJECT example.  
+- when adding a Employee - we mix the data and the behaviour. Unlike actual companies - HR add people, Accoouting defines the pay procedures.  
+- the share of data between the different calculate methods is not possible - for example how we share the working days calendar / overtime rates / etc  
+- **what we do if the employee is both SALARIED and COMMISSIONED?**  
 
 
 **PROJECT:**
@@ -168,10 +167,10 @@ def calculatePay(e: Employee) -> Money:
 ...
 
 ```
-So we may keep the original switch statements and functions despite the reasons listed in the book :
-- an emloyee may have multiple pay_types, e.g. an employee is both on salary and has the commission from sales;
-- the functionality of accounting is placed in a single accounting file;
-- we do not make the Employee master of it's own payroll. Which both matches business needs and is easier to navigate the concepts.
+So we may keep the original switch statements and functions despite the reasons listed in the book:
+- an emloyee may have multiple pay_types, e.g. an employee is both on salary and has the commission from sales;  
+- the functionality of accounting is placed in a single accounting file;  
+- we do not make the Employee master of it's own payroll. Which both matches business needs and is easier to navigate the concepts.  
 
 
 Polymophism is a hint that we are putting a certain behaviour onto the object, while it might not be cohesive enough to the object and might have a great dependency on context around it.  
