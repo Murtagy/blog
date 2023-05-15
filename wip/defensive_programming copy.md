@@ -11,16 +11,17 @@ I have read this quite a few times, although I have never understood it.
 
 Let's tell that we have a following code snippet
 
-```
+```python
 class Status(enum.Enum):
     NOT_STARTED = enum.auto()
     IN_PROGRESS = enum.auto()
-    SUCCESS = enum.auto()
-    FAILURE = enum.auto()
+    SUCCESS     = enum.auto()
+    FAILURE     = enum.auto()
 
 
-FINISHED = [Status.SUCCESS, Status.FAILURE]
+FINISHED     = [Status.SUCCESS, Status.FAILURE]
 NOT_FINISHED = [Status.NOT_STARTED, Status.IN_PROGRESS]
+
 ```
 
 How good is the following code?
