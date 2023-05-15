@@ -4,10 +4,11 @@ Category: Blog
 Tags: simplicity, python
 
 
-Uncle Bob and the group of other people claim that polymorphism and is a default way to structure code.
-I want to explore this idea a little.
+Uncle Bob and the some other people claim that polymorphism is a default way to structure code.
+I want to explore this idea a little bit.
 
-I have transated the java code snippet from the book (Chapter 3 Functions, Switch Statements ) into python:
+Let's take the example from the book (Chapter 3 Functions, Switch Statements ),
+I have transated the java code snippet into python:
 
 
 ```python
@@ -64,9 +65,9 @@ def isPayday(e: Employee, date: datetime.date) -> bool:
         case _:
             raise InvalidEmployeeType(e.type)
 ```
-All those functions are suffering from the reasons above.
+And all those functions are suffering from the 4 reasons above.
 
-And the solution to the problem according to the book looks around this:
+The solution to the problem according to the book looks around this:
 
 
 ```python
@@ -95,7 +96,7 @@ class EmployeeFactory:
                 raise InvalidEmployeeType(r.type)
 ```
 
-So the main benefit of this system is that when we decide to add a new employee type - we do not have to change multiple functions, but have to implement only the methods of the `EmployeeBase`.
+The main benefit of this system is that when we decide to add a new employee type - we do not have to change multiple functions, but have to implement only the methods of the `EmployeeBase`.
   
 ## Issues with this approach
 
