@@ -1,6 +1,6 @@
 Title: Snippets. Sidecar deployment
 Date: 2023-12-26
-Tags: simplicity, python
+Tags: kubernetes, sidecar, python
 
 I published a small snippet how to deploy two webservices together in a sidecar. [Here!](https://github.com/Murtagy/sidecar-example)  
 
